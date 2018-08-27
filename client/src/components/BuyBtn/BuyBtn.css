@@ -1,0 +1,15 @@
+.buy-btn {
+  margin: auto;
+  padding: 2px;
+  color: #e74944;
+  text-align: center;
+  border: 3px double black;
+  border-radius: 5px;
+  box-shadow: 5px 2px grey;
+  transition: all .2s ease-in-out;
+}
+
+.buy-btn:hover {
+  color: blue;
+  transform: scale(1.1);
+}
