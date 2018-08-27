@@ -8,6 +8,6 @@ const userRoutes = require("./user");
 router.use("/books", bookRoutes);
 router.use("/cart", cartRoutes);
 router.use("/departments", departmentRoutes);
-router.use("/", userRoutes);
+router.use("/users", userRoutes);
 
 module.exports = router;

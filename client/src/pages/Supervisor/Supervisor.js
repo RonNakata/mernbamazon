@@ -12,16 +12,16 @@ import Modal from 'react-modal';
 
 
 // Modal style
-const customStyles = {
-  content: {
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    transform: 'translate(-50%, -50%)'
-  }
-};
+// const customStyles = {
+//   content: {
+//     top: '50%',
+//     left: '50%',
+//     right: 'auto',
+//     bottom: 'auto',
+//     marginRight: '-50%',
+//     transform: 'translate(-50%, -50%)'
+//   }
+// };
 
 class Departments extends Component {
   constructor() {
@@ -38,6 +38,9 @@ class Departments extends Component {
       // addQuantity: "",
       // invAdded: false,
       // openprice: 0,
+
+      // Chart data
+      chartdata: [],
 
       // Book db info
       books: [],
@@ -87,6 +90,11 @@ class Departments extends Component {
   //   });
   // }
 
+  concatData(obj) {
+    this.setState({
+      chartdata: this.state.chartdata.concat(obj)
+    });
+  }
 
   componentDidMount() {
     this.loadBooks();
@@ -234,14 +242,15 @@ class Departments extends Component {
           </Col>
         </Row>
 
-        {/* <Row>
+        <Row>
           <Col size="md-12 sm-12">
-          <Jumbotron>
+            <Jumbotron>
               <h1>The Chart</h1>
             </Jumbotron>
-            <Chart />
+           <p style={{"textAlign": "center"}}> Ran out of time to implement this.</p>
+
           </Col>
-        </Row> */}
+        </Row>
 
         <Row>
           <Col size="md-12 sm-12">
@@ -272,7 +281,7 @@ class Departments extends Component {
         </Row>
 
         {/* This is the modal for modifying the inventory quantity */}
-        <Modal
+        {/* <Modal
           isOpen={this.state.modalIsOpen}
           // onAfterOpen={this.afterOpenModal}
           onRequestClose={this.closeModal}
@@ -312,7 +321,7 @@ class Departments extends Component {
                 <h2 ref={subtitle => this.subtitle = subtitle}>{this.state.openTitle} by {this.state.openAuthor}</h2>
                 {this.state.addQuantity} copies added, we now have {this.state.newQuant} copies in the inventory.
               </div>)}
-        </Modal>
+        </Modal> */}
 
       </Container>
     );

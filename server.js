@@ -28,7 +28,7 @@ if (process.env.NODE_ENV === "production") {
 app.use(passport.initialize());
 app.use(passport.session());
 
-require("./config/passport");
+// require("./config/passport");
 
 // Telling express to use Morgan
 // app.use(logger);

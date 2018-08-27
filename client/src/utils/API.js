@@ -44,19 +44,19 @@ export default {
   },
 
   getCurrentUser: function(){
-    return axios.get("/api/getUser");
+    return axios.get("/api/users/getUser");
   },
 
   signUp: (newUser) => {
-    return axios.post("/api/signup", newUser)
+    return axios.post("/api/users/signup", newUser)
   },
 
   login: (user) => {
-    return axios.post("/api/login", user)
+    return axios.post("/api/users/login", user)
   },
 
   logout: () => {
-    return axios.get("/api/logout");
+    return axios.get("/api/users/logout");
   },
 
 

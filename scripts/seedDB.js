@@ -243,38 +243,49 @@ const departmentSeed = [
   }
 ];
 
-db.Department
-  .remove({})
-  .then(() => db.Department.collection.insertMany(departmentSeed))
-  .then(data => {
-    console.log(data.result.n + " records inserted!");
-    // process.exit(0);
-  })
-  .catch(err => {
-    console.error(err);
-    // process.exit(1);
-  });
+var promiseArray = [];
 
-db.Book
+promiseArray.push(db.Department
   .remove({})
-  .then(() => db.Book.collection.insertMany(bookSeed))
-  .then(data => {
-    console.log(data.result.n + " records inserted!");
-    // process.exit(0);
-  })
-  .catch(err => {
-    console.error(err);
-    // process.exit(1);
-  });
+  .then(() => db.Department.collection.insertMany(departmentSeed)));
 
-db.Cart
+  // .then(data => {
+  //   console.log(data.result.n + " records inserted!");
+  //   // process.exit(0);
+  // })
+  // .catch(err => {
+  //   console.error(err);
+  //   // process.exit(1);
+  // });
+
+promiseArray.push(db.Book
   .remove({})
-  .then(() => db.Cart.collection.insertMany(cartSeed))
-  .then(data => {
-    console.log(data.result.n + " records inserted!");
-    process.exit(0);
-  })
-  .catch(err => {
-    console.error(err);
-    process.exit(1);
-  });
+  .then(() => db.Book.collection.insertMany(bookSeed)));
+
+Promise.all(promiseArray)
+.then(function(data){
+  console.log(data[0].result.n + " records inserted!");
+  console.log(data[1].result.n + " records inserted!");
+  process.exit(0);
+})
+
+  // .then(data => {
+  //   console.log(data.result.n + " records inserted!");
+  //   // process.exit(0);
+  // })
+  // .catch(err => {
+  //   console.error(err);
+  //   // process.exit(1);
+  // });
+
+// db.Cart
+//   .remove({})
+//   .then(() => db.Cart.collection.insertMany(cartSeed))
+//   .then(data => {
+//     console.log(data.result.n + " records inserted!");
+//     process.exit(0);
+//   })
+//   .catch(err => {
+//     console.error(err);
+//     process.exit(1);
+//   });

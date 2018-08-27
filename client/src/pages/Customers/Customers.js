@@ -137,13 +137,13 @@ class Books extends Component {
     return (
       <Container fluid>
         <Row>
-          <Col size="md-3">
+          {/* <Col size="md-3">
             <Jumbotron>
               <h1>Sidebar</h1>
             </Jumbotron>
 
-          </Col>
-          <Col size="md-9 sm-9">
+          </Col> */}
+          <Col size="md-12 sm-12">
             <Jumbotron>
               <h1>Books:</h1>
             </Jumbotron>

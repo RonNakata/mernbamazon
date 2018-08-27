@@ -2,7 +2,8 @@ const router = require("express").Router();
 const departmentsController = require("../../controllers/departmentsController");
 
 // Matches with "/api/departments"
-router.route("/")
+router
+  .route("/")
   .get(departmentsController.findAll)
   .post(departmentsController.create);
 

@@ -11,7 +11,7 @@
     "seed": "node scripts/seedDB.js",
     "install": "cd client && yarn install",
     "build": "cd client && npm run build",
-    "heroku-postbuild": "npm run build"
+    "heroku-postbuild": "npm run build && npm run seed"
   },
   "author": "",
   "license": "ISC",
@@ -34,6 +34,7 @@
     "passport-google-oauth": "^1.0.0",
     "passport-local": "^1.0.0",
     "react-bar-chart": "^0.1.2",
+    "react-easy-chart": "^1.0.0",
     "regex": "^0.1.1",
     "tiny": "0.0.10"
   }

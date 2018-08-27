@@ -1,73 +1,100 @@
-import React, {Component} from "react"
+import React, { Component } from "react"
 import { Redirect } from "react-router-dom"
 import { Wrapper, Row, Col } from "./BootstrapGrid";
 import API from "../utils/API";
+import { Container } from "../components/Grid";
+import Jumbotron from "../components/Jumbotron";
+import Modal from 'react-modal';
+
 // import googleImage from "./googleButtons/btn_google_signin_dark_normal_web.png";
 
-const styles = {
-  header: {
-    color: "purple",
-    borderStyle: "solid",
-    borderWidth: "1px",
-    textAlign: "center"
-  },
-  center: {
-    textAlign: "center"
+// Modal style
+const customStyles = {
+  content: {
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)'
   }
-}
+};
 
-class Login extends Component{ 
-  state = {
-    email: "",
-    password: "",
-    redirectTo: ""
+class Login extends Component {
+
+  constructor() {
+    super();
+
+    this.state = {
+      email: "",
+      password: "",
+      redirectTo: "",
+      // Add modal values
+      modalIsOpen: false
+    }
+    this.closeModal = this.closeModal.bind(this);
+
   }
 
   textInput = React.createRef();
 
   handleInputChange = event => {
-    const {name, value} = event.target;
-    this.setState({[name]: value})
+    const { name, value } = event.target;
+    this.setState({ [name]: value })
   };
 
   handleLogin = event => {
     event.preventDefault();
-    API.login({ email: this.state.email, password: this.state.password})
+    API.login({ email: this.state.email, password: this.state.password })
       .then((res) => {
-          console.log("RES", res);
-          this.props.setUser(res.data.user)
-          this.setState({
-            redirectTo: "/"
-          });
+        console.log("RES", res);
+        this.props.setUser(res.data.user)
+        this.setState({
+          redirectTo: "/"
+        });
       })
-      .catch(err => console.log("Error executing handleLogin: ", err));
+      .catch(err => {
+        this.openModal();
+        console.log("Error executing handleLogin: ", err)
+      });
+
+  };
+
+  openModal() {
+    this.setState({
+      modalIsOpen: true,
+    });
   }
 
-  // googleSignUp = event => {
-  //   event.preventDefault();
-  //   API.googleSignup()
-  //     .then(res => {
+  closeModal() {
+    this.setState({
+      modalIsOpen: false,
+    });
+  }
 
-  //     })
-  //     .catch(err => console.log("Error executing googleSignUp: " , err));
-  // }
+  componentWillMount() {
+    Modal.setAppElement('body');
+  }
 
-  componentDidMount(){
+  componentDidMount() {
     this.textInput.current.focus();
   }
 
-  render(){
-    if(this.state.redirectTo){
+  render() {
+    if (this.state.redirectTo) {
       return <Redirect to={this.state.redirectTo} />
     }
     return (
       <Wrapper>
-        <Row>
-          <Col>
-            <h6 style={styles.center}><i>(Login Component)</i></h6>
-            <h1 style={styles.header}>Login</h1>
-          </Col>
-        </Row>
+        <Container fluid>
+          <Row >
+            <Col size="md-12 sm-12">
+              <Jumbotron>
+                <h1>Login</h1>
+              </Jumbotron>
+            </Col>
+          </Row>
+        </Container>
         <form>
           <Row>
             <Col span={2} offset={3}>
@@ -90,16 +117,19 @@ class Login extends Component{
               <button onClick={this.handleLogin}>Submit</button>
             </Col>
           </Row>
-          <Row>
-            <Col>
-              <hr />
-              <h3 style={styles.header}>
-                Sign In With Google: 
-                {/* <Link to="/auth/google" target="_self"><img src={googleImage} alt="Sign in with Google" /></Link> */}
-              </h3>
-            </Col>
-          </Row>
         </form>
+
+
+        {/* This is the modal for modifying the inventory quantity */}
+        <Modal
+          isOpen={this.state.modalIsOpen}
+          onRequestClose={this.closeModal}
+          style={customStyles}
+          contentLabel="Quantity Modal"
+        >
+            <h1>Invalid login credentials, please try again.</h1>
+        </Modal>
+
       </Wrapper>
     );
   }

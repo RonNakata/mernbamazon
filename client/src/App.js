@@ -56,31 +56,22 @@ class App extends Component {
 
       <Router>
         <div>
-          {/* <Nav />
-          <Switch>
-            <Route exact path="/" component={Home} />
-            <Route exact path="/books" component={Books} />
-            <Route exact path="/manager" component={Manager} />
-            <Route exact path="/supervisor" component={Supervisor} />
-            <Route exact path="/customers" component={Customers} />
-            <Route exact path="/customers/:id" component={Buy} />
-            <Route exact path="/books/:id" component={Detail} />
-            <Route component={NoMatch} />
-          </Switch> */}
 
           <Nav loggedIn={this.state.loggedIn} logout={this.handleLogout} />
           <Switch>
             <Route exact path="/" render={() => <Home loggedIn={this.state.loggedIn} user={this.state.user} />} />
-            <Route exact path="/books" component={Books} />
-            <Route exact path="/manager" component={Manager} />
-            <Route exact path="/supervisor" component={Supervisor} />
-            <Route exact path="/customers" component={Customers} />
-            <Route exact path="/customers/:id" component={Buy} />
-            <Route exact path="/books/:id" component={Detail} />
-            <Route exact path="/api/signup" component={SignupForm} />
-            <Route exact path="/api/login" render={() => <Login setUser={this.setUser} />} />
+            <Route exact path="/books" render={() => <Books loggedIn={this.state.loggedIn} user={this.state.user} />} />
+            <Route exact path="/manager" render={() => <Manager loggedIn={this.state.loggedIn} user={this.state.user} />} />
+            <Route exact path="/supervisor" render={() => <Supervisor loggedIn={this.state.loggedIn} user={this.state.user} />} />
+            <Route exact path="/customers" render={() => <Customers loggedIn={this.state.loggedIn} user={this.state.user} />} />
+            <Route exact path="/customers/:id" render={() => <Buy loggedIn={this.state.loggedIn} user={this.state.user} />} />
+            <Route exact path="/books/:id" render={() => <Detail loggedIn={this.state.loggedIn} user={this.state.user} />} />
+            <Route exact path="/signup" render={() => <SignupForm loggedIn={this.state.loggedIn} user={this.state.user} />} />
+            <Route exact path="/login" render={() => <Login loggedIn={this.state.loggedIn} setUser={this.setUser} />} />
             <Route component={NoMatch} />
           </Switch>
+
+
         </div>
       </Router>
     );

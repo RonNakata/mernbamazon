@@ -162,7 +162,7 @@ class Books extends Component {
         departmentname: this.state.departmentname,
         price: this.state.price,
         stockquantity: this.state.stockquantity,
-        picture: this.state.picture
+        picture: this.state.picture || null
       })
         .then(res => this.loadBooks())
         .catch(err => console.log(err));
